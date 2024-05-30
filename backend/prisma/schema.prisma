@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id         Int             @id @default(autoincrement())
+  username   String
+  password   String
+  email      String          @unique
+  role       String          @default("user")
+  createdAt  DateTime        @default(now())
+
+  Bids       Bids[]
+  Notifications Notifications[]
+  Items Items[]
+}
+
+model Items {
+  id             Int      @id @default(autoincrement())
+  user_id        Int
+  name           String
+  description    String
+  starting_price Decimal
+  current_price  Decimal
+  image_url      String?  
+  end_time       DateTime
+  created_at     DateTime @default(now())
+
+  // Foreign keys
+  user           Users @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+
+  Bids Bids[]
+}
+
+model Bids {
+  id          Int      @id @default(autoincrement())
+  item_id     Int
+  user_id     Int
+  bid_amount  Decimal
+  created_at  DateTime @default(now())
+
+  // Foreign keys
+  item   Items @relation(fields: [item_id], references: [id])
+  user   Users @relation(fields: [user_id], references: [id])
+
+  @@index([item_id])
+  @@index([user_id])
+}
+
+model Notifications {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  message     String
+  is_read     Boolean  @default(false)
+  created_at  DateTime @default(now())
+
+  // Foreign key
+  user        Users    @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+}
