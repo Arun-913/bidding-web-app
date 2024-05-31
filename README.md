@@ -1,6 +1,6 @@
 ## Quick Setup Locally
 
-#### Setup the backend
+### Setup the backend
 
 Clone the project
 
@@ -32,7 +32,7 @@ Start the server
   node dist/bin.js
 ```
 
-#### Test the backend with vitest ans supertest library
+### Test the backend with vitest ans supertest library
 
 Go to the project directory
 
@@ -45,7 +45,7 @@ Start the testing
   ./scripts/run-integration.sh
 ```
 
-#### Setup the frontend
+### Setup the frontend
 
 Go to the project directory
 
