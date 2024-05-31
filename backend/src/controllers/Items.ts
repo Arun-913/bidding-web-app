@@ -11,16 +11,8 @@ const ITEMS_PER_PAGE = 10;
 const newAuctionValidationSchema = z.object({
     name: z.string(),
     description: z.string(),
-    starting_price: z.number().refine(val =>{
-        return val % 1 !== 0;
-    },{
-        message: 'Value must be a decimal',
-    }),
-    current_price: z.number().refine(val =>{
-        return val % 1 !== 0;
-    },{
-        message: 'Value must be a decimal',
-    }),
+    starting_price: z.number(),
+    current_price: z.number(),
     image_url: z.string().optional(),
     end_time: z.date().optional(),
 });
@@ -125,8 +117,6 @@ export const handleUpdateAuctionById = async(req: AuthenticatedRequest, res:Resp
     const { id } = req.params;
     const { userId, userRole } = req;
     const updateData = req.body;
-    console.log(userId, "  ", userRole);
-    console.log(updateData);
 
     try {
         const validatedData = updateAuctionValidationSchema.parse(updateData);
@@ -173,6 +163,12 @@ export const handleDeleteAuctionById = async (req: AuthenticatedRequest, res: Re
         if (!item) {
             return res.status(404).json({ message: 'Item not found' });
         }
+
+        await prismaClient.bids.deleteMany({
+            where: {
+                item_id: itemId,
+            }
+        })
 
         if(item.user_id === req.userId || req.userRole === 'admin'){
             await prismaClient.items.delete({

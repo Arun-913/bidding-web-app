@@ -9,7 +9,7 @@ import notificationRouter from './routers/Notifications';
 import { Server } from 'socket.io';
 
 
-const app = express();
+export const app = express();
 export const server = http.createServer(app);
 
 // Middleware

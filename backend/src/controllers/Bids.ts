@@ -74,7 +74,7 @@ export const handleCreateNewBid = async (req: AuthenticatedRequest, res: Respons
             data: { current_price: validatedData.bid_amount },
         });
   
-        res.status(201).json({ newBid });
+        res.status(200).json({ newBid });
     } catch (error) {
         if (error instanceof z.ZodError) {
             return res.status(400).json({ message: 'Validation error', details: error.errors });

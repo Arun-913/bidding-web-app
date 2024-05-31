@@ -32,6 +32,7 @@ const authMiddleware = (req: AuthenticatedRequest, res: Response, next: NextFunc
             return res.status(401).json({ message: 'Invalid token payload' });
         }
     } catch (error) {
+        console.log('Invalid token');
         return res.status(401).json({ message: 'Invalid token' });
     }
 };
