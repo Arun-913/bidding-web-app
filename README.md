@@ -32,7 +32,7 @@ Start the server
   node dist/bin.js
 ```
 
-### Test the backend with vitest ans supertest library
+### Test the backend with vitest and supertest library
 
 Go to the project directory
 
