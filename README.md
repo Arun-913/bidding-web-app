@@ -1,71 +1,47 @@
 ## Quick Setup Locally
 
-### Setup the backend
+### Installation
 
-Clone the project
-
-```bash
-  git clone https://github.com/Arun-913/chat-web-app.git
-```
-
-Go to the project directory
+Clone the repository:
 
 ```bash
-  cd bidding-web-app/backend
+  git clone https://github.com/Arun-913/bidding-web-app.git
 ```
 
-Install dependencies
+Navigate to the project Directort:
 
 ```bash
-  npm install
+  cd bidding-web-app
 ```
 
-Copy the .env.example to .env
-```bash
-  cp .env.example .env
-```
-
-Add the required environment variables
-Start the server
-```bash
-  npm run build
-  node dist/bin.js
-```
-
-### Test the backend with vitest and supertest library
-
-Go to the project directory
+Run the following command to start the application
 
 ```bash
-  cd bidding-web-app/backend
-```
-Start the testing
-
-```bash
-  ./scripts/run-integration.sh
+  docker-compose up
 ```
 
-### Setup the frontend
+#### Without Docker
+  - Clone the repository:
+  ```bash
+    git clone https://github.com/Arun-913/bidding-web-app.git
+  ```
 
-Go to the project directory
+  - Create a `.env` file based on the `.env.example` file in both the backend/ and frontend/ directorie
 
-```bash
-  cd bidding-web-app/frontend
-```
+  - Install the dependencies in both the backend/ and frontend/ directories:
+  ```bash
+    npm install
+  ```
 
-Install dependencies
-
-```bash
-  npm install
-```
-
-Copy the .env.example to .env
-```bash
-  cp .env.example .env
-```
-
-Add the required environment variables
-Start the frontend app
-```bash
-  npm run dev
-```
+  - To start the backend server, navigate to the backend/ directory and run:
+  ```bash
+    cd backend
+    npm run build
+    node dist/index.js
+  ```
+  
+  - To start the frontend application, navigate to the frontend/ directory and run:
+  ```bash
+    cd frontend
+    npm run dev
+  ```
