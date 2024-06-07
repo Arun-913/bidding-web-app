@@ -37,9 +37,9 @@ Run the following command to start the application
   ```bash
     cd backend
     npm run build
-    node dist/index.js
+    node dist/bin.js
   ```
-  
+
   - To start the frontend application, navigate to the frontend/ directory and run:
   ```bash
     cd frontend
