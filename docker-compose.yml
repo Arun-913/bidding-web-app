@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres
+    container_name: bidding-database
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    volumes:
+      - bidding_volume:/var/lib/postgresql/data
+    networks:
+      - bidding_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bidding-backend-container
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://postgres:mysecretpassword@bidding-database:5432/postgres
+      - JWT_AUTH_SECRET=Arun
+    depends_on:
+      - database
+    networks:
+      - bidding_network
+
+      
+networks:
+  bidding_network:
+
+volumes:
+  bidding_volume:
